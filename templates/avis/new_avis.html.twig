@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{title}}
+{% endblock %}
+
+{% block body %}
+
+	<h1 style="text-align: center">Créer un nouvel Avis</h1>
+
+	<div class="form-container">
+		{{ form_start(form) }}
+		<div class="form-group">
+			{{ form_label(form.user) }}
+			{{ form_widget(form.user, {'attr': {'class': 'form-control'}}) }}
+		</div>
+		<div class="form-group">
+			{{ form_label(form.game) }}
+			{{ form_widget(form.game, {'attr': {'class': 'form-control'}}) }}
+		</div>
+		<div class="form-group">
+			{{ form_label(form.commentaire) }}
+			{{ form_widget(form.commentaire, {'attr': {'class': 'form-control'}}) }}
+		</div>
+		<div class="button-container">
+			<button class="btn">Créer</button>
+		</div>
+		{{ form_end(form) }}
+	</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{title}}
+{% endblock %}
+
+{% block body %}
+
+	<h1 style="text-align: center">Liste des équipes</h1>
+	<div class="teams-container">
+		{% for team in teams %}
+			<div class="team-card">
+				<img src="{{ asset(team.pathImage) }}" alt="{{ team.name }} logo" class="team-logo">
+				<div class="team-name">{{ team.name }}</div>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}

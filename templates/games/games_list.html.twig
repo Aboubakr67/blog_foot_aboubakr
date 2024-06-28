@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{title}}
+{% endblock %}
+
+{% block body %}
+
+
+	<h1 style="text-align: center">Liste des matchs</h1>
+
+	<div class="avis-container">
+		{% for game in games %}
+			<div class="avis-card">
+				<div class="avis-card-header">
+					<div class="equipe">
+						<img src="{{ asset(game.equipeDomicile.pathImage) }}" alt="{{ game.equipeDomicile.name }} logo">
+						<span>{{ game.equipeDomicile.name }}</span>
+					</div>
+					<div class="score">
+						{{ game.score }}
+					</div>
+					<div class="equipe">
+						<img src="{{ asset(game.equipeExterieur.pathImage) }}" alt="{{ game.equipeExterieur.name }} logo">
+						<span>{{ game.equipeExterieur.name }}</span>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}

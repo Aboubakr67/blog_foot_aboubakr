@@ -1,3 +1,353 @@
 body {
-    background-color: skyblue;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  background-color: antiquewhite;
+}
+
+header {
+  color: white;
+  padding: 10px 0;
+}
+
+.navbar {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.nav-list {
+  display: flex;
+  justify-content: space-between;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-item {
+  padding: 9px;
+  background-color: rgba(0, 0, 0, 0.567);
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.nav-item a {
+  text-decoration: none;
+  color: white;
+  transition: color 0.3s;
+  font-weight: bold;
+}
+
+.nav-item a:hover {
+  color: #ffc107;
+}
+
+/* index.html.twig - accueil */
+.container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
+  padding: 20px;
+}
+
+.site-title {
+  font-size: 36px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.site-description {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.main-image {
+  width: 900px;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+/*  avis_list.html.twig -- page qui affiche la liste des avis*/
+.avis-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+}
+
+.avis-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: calc(30% - 40px);
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  min-height: 200px;
+  box-sizing: border-box;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.avis-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.avis-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.avis-card-header .equipe {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avis-card-header .equipe img {
+  width: 50px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.avis-card-header .equipe span {
+  font-size: 16px;
+}
+
+.avis-card-header .score {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
+.avis-card-body {
+  font-size: 14px;
+  color: #555;
+  flex-grow: 1;
+}
+
+.link {
+  display: inline-block;
+  text-decoration: none;
+  color: white;
+  margin-top: 10px;
+  background-color: black;
+  padding: 9px;
+  border: solid 1px black;
+  border-radius: 5px;
+}
+
+.link:hover {
+  color: black;
+  background-color: white;
+}
+
+/*  avis_details.html.twig -- page qui affiche le details d'un avis*/
+.detail-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.detail-container:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.detail-container h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.detail-container p {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.detail-container strong {
+  font-weight: bold;
+  color: #333;
+}
+
+.team-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.team-info .team {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.team-info .team img {
+  width: 50px;
+  height: auto;
+  margin-right: 15px;
+}
+
+.team-info .team span {
+  font-size: 18px;
+  color: #333;
+}
+
+.team-info .score {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  flex: 0.5;
+  text-align: center;
+}
+
+.detail-container a {
+  display: inline-block;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  margin-right: 15px;
+  transition: color 0.3s;
+  background-color: black;
+  padding: 9px;
+  border: solid 1px black;
+  border-radius: 5px;
+}
+
+.detail-container a.delete:hover {
+  /* text-decoration: underline; */
+  /* color: #0056b3; */
+  color: black;
+  background-color: red;
+}
+
+.detail-container a.edit:hover {
+  /* text-decoration: underline; */
+  /* color: #0056b3; */
+  color: black;
+  background-color: blue;
+}
+
+.detail-container .link-container {
+  margin-top: 30px;
+  text-align: center;
+}
+
+/*  teams_list.html.twig -- page qui la liste des equipess*/
+
+.teams-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+}
+
+.team-card {
+  width: 200px;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.team-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.team-logo {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin-bottom: 15px;
+}
+
+.team-name {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* new_avis.html.twig -  Afficher le formulaire de creation d'un avis */
+.form-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
+}
+
+.form-control:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.button-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn:hover {
+  background-color: #0056b3;
 }
