@@ -34,10 +34,12 @@
 		<p>
 			{{ avis.updatedAt ? 'Mise à jour le : ' ~ avis.updatedAt|date('d/m/Y H:i:s') : 'Créé le : ' ~ avis.createdAt|date('d/m/Y H:i:s') }}
 		</p>
-		<div class="link-container">
-			<a class="edit" href="{{ path('avis_edit', { 'slug': (avis.game.equipeDomicile|lower|replace({' ': '-'}) ~ '-vs-' ~ avis.game.equipeExterieur|lower|replace({' ': '-'})), 'id': avis.id }) }}">Modifier</a>
-			<a class="delete" href="{{ path('avis_delete', {id: avis.id}) }}">Supprimer</a>
-		</div>
+		{% if is_granted('ROLE_ADMIN') or (app.user and app.user.id == avis.user.id) %}
+			<div class="link-container">
+				<a class="edit" href="{{ path('avis_edit', { 'slug': (avis.game.equipeDomicile|lower|replace({' ': '-'}) ~ '-vs-' ~ avis.game.equipeExterieur|lower|replace({' ': '-'})), 'id': avis.id }) }}">Modifier</a>
+				<a class="delete" href="{{ path('avis_delete', {id: avis.id}) }}">Supprimer</a>
+			</div>
+		{% endif %}
 	</div>
 
 {% endblock %}

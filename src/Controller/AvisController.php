@@ -5,8 +5,10 @@ namespace App\Controller;
 use App\Entity\Avis;
 use App\Form\AvisType;
 use App\Repository\AvisRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -45,7 +47,7 @@ class AvisController extends AbstractController
 
 
     #[Route('/avis/new', name: 'avis_new')]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, Security $security, UserRepository $userRepository): Response
     {
         $avis = new Avis();
         $form = $this->createForm(AvisType::class, $avis);
@@ -53,6 +55,24 @@ class AvisController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // Get the current user
+            $user = $security->getUser();
+
+            // For non-admin users, set the user explicitly
+            if (!$security->isGranted('ROLE_ADMIN')) {
+                $userId = $form->get('user')->getData();
+                $user = $userRepository->find($userId);
+                if ($user) {
+                    $avis->setUser($user);
+                } else {
+                    throw new \Exception('User not found');
+                }
+            }
+
+
+
+
             $avis->setCreatedAt(new \DateTimeImmutable());
             $entityManager->persist($avis);
             $entityManager->flush();

@@ -1,0 +1,51 @@
+<header>
+	<nav class="navbar">
+		<ul class="nav-list">
+			<li class="nav-item">
+				<a href="{{ path('home') }}">Accueil</a>
+			</li>
+			{% if not app.user %}
+				<li class="nav-item">
+					<a href="{{ path('app_register') }}">Inscription</a>
+				</li>
+				<li class="nav-item">
+					<a href="{{ path('app_login') }}">Connexion</a>
+				</li>
+				<li class="nav-item">
+					<a href="{{ path('avis_list') }}">Liste des avis</a>
+				</li>
+				<li class="nav-item">
+					<a href="{{ path('teams_list') }}">Liste des équipes</a>
+				</li>
+				<li class="nav-item">
+					<a href="{{ path('games_list') }}">Liste des matchs</a>
+				</li>
+			{% else %}
+				{% if is_granted('ROLE_ADMIN') %}
+					{# <li class="nav-item">
+																										<a href="{{ path('dashboard') }}">Dashboard</a>
+																									</li> #}
+
+				{% endif %}
+				{% if is_granted('ROLE_USER') %}
+					<li class="nav-item">
+						<a href="{{ path('avis_list') }}">Liste des avis</a>
+					</li>
+					<li class="nav-item">
+						<a href="{{ path('teams_list') }}">Liste des équipes</a>
+					</li>
+					<li class="nav-item">
+						<a href="{{ path('games_list') }}">Liste des matchs</a>
+					</li>
+					<li class="nav-item">
+						<a href="{{ path('avis_new') }}">Créer un avis</a>
+					</li>
+					<li class="nav-item">
+						<a href="{{ path('app_logout') }}">Déconnexion</a>
+					</li>
+				{% endif %}
+			{% endif %}
+
+		</ul>
+	</nav>
+</header>

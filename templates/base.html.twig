@@ -16,27 +16,14 @@
 	</head>
 	<body>
 
-		<header>
-			<nav class="navbar">
-				<ul class="nav-list">
-					<li class="nav-item">
-						<a href="{{ path('home') }}">Accueil</a>
-					</li>
-					<li class="nav-item">
-						<a href="{{ path('avis_list') }}">Liste des avis</a>
-					</li>
-					<li class="nav-item">
-						<a href="{{ path('teams_list') }}">Liste des équipes</a>
-					</li>
-					<li class="nav-item">
-						<a href="{{ path('games_list') }}">Liste des matchs</a>
-					</li>
-					<li class="nav-item">
-						<a href="{{ path('avis_new') }}">Créer un avis</a>
-					</li>
-				</ul>
-			</nav>
-		</header>
+		{% include "_partials/navbar.html.twig" %}
+		{% if app.user %}
+			<div class="mb-3">
+				Vous êtes connecté(e) en tant que
+				{{ app.user.userIdentifier }},
+				{# <a href="{{ path('app_logout') }}">Me déconnecter</a> #}
+			</div>
+		{% endif %}
 
 		{% block body %}{% endblock %}
 	</body>

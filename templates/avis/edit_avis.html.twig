@@ -9,10 +9,20 @@
 
 	<div class="form-container">
 		{{ form_start(form) }}
-		<div class="form-group">
-			{{ form_label(form.user) }}
-			{{ form_widget(form.user, {'attr': {'class': 'form-control'}}) }}
-		</div>
+		{% if app.user and not is_granted('ROLE_ADMIN') %}
+			<div class="form-group">
+				{{ form_label(form.username) }}
+				{{ form_widget(form.username, {'attr': {'class': 'form-control'}}) }}
+			</div>
+			<div class="form-group">
+				{{ form_widget(form.user) }}
+			</div>
+		{% else %}
+			<div class="form-group">
+				{{ form_label(form.user) }}
+				{{ form_widget(form.user, {'attr': {'class': 'form-control'}}) }}
+			</div>
+		{% endif %}
 		<div class="form-group">
 			{{ form_label(form.game) }}
 			{{ form_widget(form.game, {'attr': {'class': 'form-control'}}) }}
