@@ -25,6 +25,9 @@ class Teams
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $pathImage = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $slug = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +89,18 @@ class Teams
     public function setPathImage(?string $pathImage): static
     {
         $this->pathImage = $pathImage;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): static
+    {
+        $this->slug = $slug;
 
         return $this;
     }

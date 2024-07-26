@@ -7,12 +7,27 @@
 {% block body %}
 
 	<h1 style="text-align: center">Liste des équipes</h1>
+
+	{% for label, messages in app.flashes %}
+		<div class="alert alert-{{ label }}">
+			{% for message in messages %}
+				<p>{{ message }}</p>
+			{% endfor %}
+		</div>
+	{% endfor %}
+
 	<div class="teams-container">
-		{% for team in teams %}
+		{% for team in pagination %}
 			<div class="team-card">
-				<img src="{{ asset(team.pathImage) }}" alt="{{ team.name }} logo" class="team-logo">
+				<a href="{{ path('teams_details', { 'slug': team.slug , 'id': team.id }) }}" class="link">Voir détails</a>
+				{# <img src="{{ asset(team.pathImage) }}" alt="{{ team.name }} logo" class="team-logo"> #}
+				<img src="{{ team.pathImage ? asset(team.pathImage) : asset('images/default-team-logo.png') }}" alt="{{ team.name }} logo" class="team-logo">
 				<div class="team-name">{{ team.name }}</div>
 			</div>
 		{% endfor %}
+	</div>
+
+	<div class="pagination-wrapper text-center">
+		{{ knp_pagination_render(pagination) }}
 	</div>
 {% endblock %}

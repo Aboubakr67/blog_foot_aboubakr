@@ -10,7 +10,7 @@
 	<h1 style="text-align: center">Liste des matchs</h1>
 
 	<div class="avis-container">
-		{% for game in games %}
+		{% for game in pagination %}
 			<div class="avis-card">
 				<div class="avis-card-header">
 					<div class="equipe">
@@ -25,7 +25,13 @@
 						<span>{{ game.equipeExterieur.name }}</span>
 					</div>
 				</div>
+				<div class="avis-card-link">
+					<a href="{{ path('games_details', { 'slug': game.slug, 'id': game.id }) }}" class="link">Voir détails</a>
+				</div>
 			</div>
 		{% endfor %}
+	</div>
+	<div class="pagination-wrapper text-center">
+		{{ knp_pagination_render(pagination) }}
 	</div>
 {% endblock %}

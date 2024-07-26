@@ -4,6 +4,12 @@
 			<li class="nav-item">
 				<a href="{{ path('home') }}">Accueil</a>
 			</li>
+			{# <li class="nav-item">
+													<a href="{{ path('contact') }}">Contact</a>
+												</li>
+												<li class="nav-item">
+													<a href="{{ path('mentions_legales') }}">Mentions legales</a>
+												</li> #}
 			{% if not app.user %}
 				<li class="nav-item">
 					<a href="{{ path('app_register') }}">Inscription</a>
@@ -22,9 +28,15 @@
 				</li>
 			{% else %}
 				{% if is_granted('ROLE_ADMIN') %}
-					{# <li class="nav-item">
-																										<a href="{{ path('dashboard') }}">Dashboard</a>
-																									</li> #}
+					<li class="nav-item">
+						<a href="{{ path('dashboard') }}">Dashboard</a>
+					</li>
+					<li class="nav-item">
+						<a href="{{ path('teams_new') }}">Créer une équipe</a>
+					</li>
+					<li class="nav-item">
+						<a href="{{ path('games_new') }}">Créer un match</a>
+					</li>
 
 				{% endif %}
 				{% if is_granted('ROLE_USER') %}

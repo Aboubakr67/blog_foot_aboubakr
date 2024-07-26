@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ title }}
+{% endblock %}
+
+{% block body %}
+	<div class="container mt-5">
+		<h1 class="text-center mb-4">{{ game.title }}</h1>
+
+		<div class="card bg-white shadow-sm">
+			<div class="card-body">
+				<h5 class="card-title mb-4">Détails du Match</h5>
+
+				<div class="row mb-4">
+					<div class="col-md-6 text-center">
+						{% if game.equipeDomicile.pathImage %}
+							<img src="{{ asset(game.equipeDomicile.pathImage) }}" alt="{{ game.equipeDomicile.name }} logo" class="img-fluid rounded-circle" style="max-width: 150px;">
+						{% else %}
+							<div class="alert alert-warning">Pas d'image disponible pour l'équipe domicile.</div>
+						{% endif %}
+						<h6 class="mt-2">{{ game.equipeDomicile.name }}</h6>
+					</div>
+					<div class="col-md-6 text-center">
+						{% if game.equipeExterieur.pathImage %}
+							<img src="{{ asset(game.equipeExterieur.pathImage) }}" alt="{{ game.equipeExterieur.name }} logo" class="img-fluid rounded-circle" style="max-width: 150px;">
+						{% else %}
+							<div class="alert alert-warning">Pas d'image disponible pour l'équipe extérieure.</div>
+						{% endif %}
+						<h6 class="mt-2">{{ game.equipeExterieur.name }}</h6>
+					</div>
+				</div>
+
+				<div class="row mb-4">
+					<div class="col-sm-12">
+						<p class="text-center font-weight-bold">
+							{{ game.score ? 'Score: ' ~ game.score : 'Score non disponible' }}
+						</p>
+					</div>
+				</div>
+
+				<dl class="row mb-4">
+					<dt class="col-sm-4">Date du Match:</dt>
+					<dd class="col-sm-8">{{ game.dateMatch|date('d/m/Y H:i:s') }}</dd>
+				</dl>
+
+				{% if is_granted('ROLE_ADMIN') %}
+					<div class="text-center mt-4">
+						<a class="btn btn-primary mx-2" href="{{ path('games_edit', { 'slug': game.slug, 'id': game.id }) }}">Modifier</a>
+						<form method="post" action="{{ path('games_delete', { 'slug': game.slug, 'id': game.id }) }}" class="d-inline" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce jeu ?');">
+							<input type="hidden" name="_method" value="DELETE">
+							<button type="submit" class="btn btn-danger">Supprimer</button>
+						</form>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+{% endblock %}

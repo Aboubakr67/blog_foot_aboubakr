@@ -5,10 +5,10 @@ body {
   background-color: antiquewhite;
 }
 
-header {
+/* header {
   color: white;
   padding: 10px 0;
-}
+} */
 
 .navbar {
   display: grid;
@@ -31,6 +31,7 @@ header {
   background-color: rgba(0, 0, 0, 0.567);
   border: 1px solid black;
   border-radius: 5px;
+  margin-right: 10px;
 }
 
 .nav-item a {
@@ -44,8 +45,28 @@ header {
   color: #ffc107;
 }
 
+/* ------------- */
+
+.alert {
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+}
+
+.alert-success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.alert-error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
 /* index.html.twig - accueil */
-.container {
+.container_accueil {
   display: grid;
   grid-template-rows: auto 1fr;
   grid-template-columns: 1fr;
@@ -400,4 +421,142 @@ header {
   .avis-card {
     width: calc(100% - 20px); /* Full width for single column */
   }
+}
+
+/* Contact */
+
+/* Style pour le formulaire de contact */
+.contact-form {
+  max-width: 800px;
+  margin: 0 auto; /* Centre le formulaire horizontalement */
+  padding: 2rem;
+  background-color: #f9f9f9; /* Fond légèrement gris */
+  border-radius: 8px; /* Coins arrondis */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère */
+}
+
+.contact-form .form-control {
+  border-radius: 0.25rem;
+  box-shadow: none; /* Enlever les ombres pour une apparence plus nette */
+}
+
+.contact-form .form-label {
+  font-weight: bold;
+}
+
+.contact-form .btn-primary {
+  border-radius: 0.25rem;
+  padding: 1rem 2rem; /* Taille du bouton */
+}
+
+/* Styles pour les écrans plus petits */
+@media (max-width: 767.98px) {
+  .contact-form {
+    padding: 1rem;
+  }
+}
+
+/* Inscription */
+.registration-form {
+  max-width: 600px;
+  margin: 0 auto; /* Centre le formulaire horizontalement */
+  padding: 2rem;
+  background-color: #f9f9f9; /* Fond légèrement gris */
+  border-radius: 8px; /* Coins arrondis */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère */
+}
+
+.registration-form .form-control {
+  border-radius: 0.25rem;
+  box-shadow: none; /* Enlever les ombres pour une apparence plus nette */
+}
+
+.registration-form .form-label {
+  font-weight: bold;
+}
+
+.registration-form .btn-primary {
+  border-radius: 0.25rem;
+  padding: 1rem 2rem; /* Taille du bouton */
+}
+
+/* Styles pour les écrans plus petits */
+@media (max-width: 767.98px) {
+  .registration-form {
+    padding: 1rem;
+  }
+}
+
+/* Connexion */
+
+.form-signin {
+  background-color: #f8f9fa;
+  border-radius: 0.5rem;
+  padding: 2rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-signin .form-control {
+  border-radius: 0.25rem;
+}
+
+.form-signin .form-label {
+  font-weight: bold;
+}
+
+.form-signin .btn-primary {
+  border-radius: 0.25rem;
+  padding: 1rem;
+}
+
+/* Styles pour les écrans plus petits */
+@media (max-width: 767.98px) {
+  .form-signin {
+    padding: 1rem;
+  }
+}
+
+/* CSS pour personnaliser la pagination */
+/* Centrer la pagination */
+.pagination-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0; /* Espacement vertical */
+}
+
+/* Assurer que les éléments de pagination sont sur une seule ligne */
+.pagination {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.page-item {
+  margin: 0 2px; /* Espacement entre les éléments de pagination */
+}
+
+.page-link {
+  padding: 0.5rem 0.75rem; /* Ajuster le padding */
+  border-radius: 0.25rem; /* Coins arrondis */
+  border: 1px solid #dee2e6; /* Bordure grise pour les boutons */
+  background-color: #fff; /* Fond blanc pour les boutons */
+  color: #007bff; /* Couleur du texte des boutons */
+}
+
+.page-item.active .page-link {
+  background-color: #007bff; /* Couleur de fond pour l'élément actif */
+  border-color: #007bff; /* Couleur de bordure pour l'élément actif */
+  color: #fff; /* Couleur du texte pour l'élément actif */
+}
+
+.page-link:hover {
+  background-color: #f8f9fa; /* Couleur de fond au survol */
+  border-color: #ced4da; /* Couleur de bordure au survol */
+}
+
+/* Mentions légales */
+
+.legal-notice {
+  padding: 20px; /* Vous pouvez ajuster cette valeur selon vos besoins */
 }

@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{title}}
+{% endblock %}
+
+{% block body %}
+
+	<h1 style="text-align: center">Créer un nouveau jeu</h1>
+
+	{% for label, messages in app.flashes %}
+		<div class="alert alert-{{ label }}">
+			{% for message in messages %}
+				<p>{{ message }}</p>
+			{% endfor %}
+		</div>
+	{% endfor %}
+
+	<div class="form-container">
+		{{ form_start(form) }}
+		<div class="form-group">
+			{{ form_label(form.title) }}
+			{{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+		</div>
+		<div class="form-group">
+			{{ form_label(form.equipeDomicile) }}
+			{{ form_widget(form.equipeDomicile, {'attr': {'class': 'form-control'}}) }}
+		</div>
+		<div class="form-group">
+			{{ form_label(form.equipeExterieur) }}
+			{{ form_widget(form.equipeExterieur, {'attr': {'class': 'form-control'}}) }}
+		</div>
+		<div class="form-group">
+			{{ form_label(form.dateMatch) }}
+			{{ form_widget(form.dateMatch, {'attr': {'class': 'form-control'}}) }}
+		</div>
+		<div class="form-group">
+			{{ form_label(form.score) }}
+			{{ form_widget(form.score, {'attr': {'class': 'form-control'}}) }}
+		</div>
+		<div class="button-container">
+			<button class="btn btn-primary">Créer</button>
+		</div>
+		{{ form_end(form) }}
+	</div>
+{% endblock %}

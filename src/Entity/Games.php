@@ -45,6 +45,9 @@ class Games
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $score = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $slug = null;
+
     public function __construct()
     {
         $this->commentaire = new ArrayCollection();
@@ -172,6 +175,18 @@ class Games
     public function setScore(?string $score): static
     {
         $this->score = $score;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): static
+    {
+        $this->slug = $slug;
 
         return $this;
     }

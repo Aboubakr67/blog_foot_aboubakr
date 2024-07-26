@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ title }}
+{% endblock %}
+
+{% block body %}
+	<div class="container mt-5">
+		<div class="card bg-white shadow-sm">
+			<div class="card-body">
+				<h1 class="card-title text-center mb-4">{{ team.name }}</h1>
+
+				{% if team.pathImage %}
+					<div class="text-center mb-4">
+						<img src="{{ asset(team.pathImage) }}" alt="{{ team.name }} logo" class="img-fluid rounded-circle team-logo">
+					</div>
+				{% else %}
+					<div class="alert alert-warning text-center">
+						Pas d'image disponible pour cette équipe.
+					</div>
+				{% endif %}
+
+				<p class="text-center mb-4">
+					{{ team.updatedAt ? 'Mise à jour le : ' ~ team.updatedAt|date('d/m/Y H:i:s') : 'Créé le : ' ~ team.createdAt|date('d/m/Y H:i:s') }}
+				</p>
+
+				{% if is_granted('ROLE_ADMIN') %}
+					<div class="text-center mt-4">
+						<a class="btn btn-primary mx-2" href="{{ path('teams_edit', { 'slug': team.slug, 'id': team.id }) }}">Modifier</a>
+						<form method="post" action="{{ path('teams_delete', { 'slug': team.slug, 'id': team.id }) }}" class="d-inline" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette équipe ?');">
+							<input type="hidden" name="_method" value="DELETE">
+							<button type="submit" class="btn btn-danger">Supprimer</button>
+						</form>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+{% endblock %}

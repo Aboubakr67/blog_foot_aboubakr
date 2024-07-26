@@ -49,14 +49,28 @@ security:
   # Easy way to control access for large sections of your site
   # Note: Only the *first* access control that matches will be used
   access_control:
-    # - { path: ^/admin, roles: ROLE_ADMIN }
-    # - { path: ^/profile, roles: ROLE_USER }
-    # - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-    # - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-    # - { path: ^/avis_list, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-    # - { path: ^/teams_list, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-    # - { path: ^/games_list, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-    # - { path: ^/, roles: ROLE_USER }
+    - { path: ^/dashboard, roles: ROLE_ADMIN }
+      # Accès à la page d'accueil, aux avis, et à la liste des jeux ouvert à tous
+      # - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+      # - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+      # - { path: ^/avis, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+      # - { path: ^/games, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+      # - { path: ^/games, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+      # - { path: ^/teams, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+
+      # Accès aux détails d'avis ouvert à tous
+      # - { path: ^/avis/\d+-\d+, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+
+      # Accès aux actions de création, modification, et suppression d'avis uniquement pour les utilisateurs connectés
+      # - { path: ^/avis/new, roles: ROLE_USER }
+      # - { path: ^/avis/\d+-vs-\d+/edit, roles: ROLE_USER }
+      # - { path: ^/avis/\d+/delete, roles: ROLE_USER }
+
+      # Accès à la page de connexion, d'enregistrement, et de déconnexion ouvert à tous
+      # - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+      # - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+      # - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+      # - { path: ^/logout, roles: ROLE_USER }
 
 when@test:
   security:

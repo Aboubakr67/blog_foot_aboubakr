@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact
+{% endblock %}
+
+{% block body %}
+	<div class="container mt-5">
+		<h1 class="mb-4 text-center">Contactez-nous</h1>
+
+		{% for message in app.flashes('success') %}
+			<div class="alert alert-success alert-dismissible fade show" role="alert">
+				{{ message }}
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+		{% endfor %}
+
+		{{ form_start(form, {'attr': {'class': 'contact-form'}}) }}
+		<div class="row mb-4">
+			<div class="col-md-12">
+				{{ form_label(form.title, 'Titre', {'label_attr': {'class': 'form-label'}}) }}
+				{{ form_widget(form.title, {'attr': {'class': 'form-control', 'placeholder': 'Entrez le titre', 'style': 'height: 3.5rem;'}}) }}
+				{{ form_errors(form.title) }}
+			</div>
+		</div>
+		<div class="row mb-4">
+			<div class="col-md-12">
+				{{ form_label(form.email, 'Email', {'label_attr': {'class': 'form-label'}}) }}
+				{{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Entrez votre email', 'style': 'height: 3.5rem;'}}) }}
+				{{ form_errors(form.email) }}
+			</div>
+		</div>
+		<div class="row mb-4">
+			<div class="col-md-12">
+				{{ form_label(form.commentaire, 'Message', {'label_attr': {'class': 'form-label'}}) }}
+				{{ form_widget(form.commentaire, {'attr': {'class': 'form-control', 'placeholder': 'Votre message', 'style': 'height: 10rem;'}}) }}
+				{{ form_errors(form.commentaire) }}
+			</div>
+		</div>
+		<div class="row mb-4">
+			<div class="col-md-12 text-center">
+				<button type="submit" class="btn btn-primary btn-lg">Envoyer</button>
+			</div>
+		</div>
+		{{ form_end(form) }}
+	</div>
+{% endblock %}
