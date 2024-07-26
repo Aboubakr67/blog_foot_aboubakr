@@ -24,16 +24,12 @@ class ContactController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
 
-            // Si vous voulez stocker les messages dans une base de données
-            // $contact->setTitle($data['title']);
-            // $contact->setEmail($data['email']);
-            // $contact->setCommentaire($data['commentaire']);
             $contact->setCreatedAt(new \DateTimeImmutable());
 
             $entityManager->persist($contact);
             $entityManager->flush();
 
-            // Ajoutez un message flash ou envoyez un email, selon vos besoins
+
             $this->addFlash('success', 'Votre message a été envoyé avec succès.');
 
             return $this->redirectToRoute('contact');

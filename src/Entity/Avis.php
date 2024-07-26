@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\AvisRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: AvisRepository::class)]
 class Avis
@@ -16,13 +17,16 @@ class Avis
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['avis.list'])]
     private ?User $user = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['avis.list'])]
     private ?Games $game = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['avis.list', 'game.list'])]
     private ?string $commentaire = null;
 
     #[ORM\Column]

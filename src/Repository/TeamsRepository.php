@@ -16,6 +16,16 @@ class TeamsRepository extends ServiceEntityRepository
         parent::__construct($registry, Teams::class);
     }
 
+    public function findAllSorted()
+    {
+        return $this->createQueryBuilder('a')
+            ->addSelect('COALESCE(a.updatedAt, a.createdAt) AS HIDDEN sortDate')
+            ->orderBy('sortDate', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+
     //    /**
     //     * @return Teams[] Returns an array of Teams objects
     //     */

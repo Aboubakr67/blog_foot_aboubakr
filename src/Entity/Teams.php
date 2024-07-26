@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\TeamsRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: TeamsRepository::class)]
 class Teams
@@ -14,6 +15,7 @@ class Teams
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['game.list', 'avis.list', 'team.list'])]
     private ?string $name = null;
 
     #[ORM\Column]

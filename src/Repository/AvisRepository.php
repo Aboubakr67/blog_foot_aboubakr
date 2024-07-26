@@ -16,6 +16,15 @@ class AvisRepository extends ServiceEntityRepository
         parent::__construct($registry, Avis::class);
     }
 
+    public function findAllSorted()
+    {
+        return $this->createQueryBuilder('a')
+            ->addSelect('COALESCE(a.updatedAt, a.createdAt) AS HIDDEN sortDate')
+            ->orderBy('sortDate', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
     //    /**
     //     * @return Avis[] Returns an array of Avis objects
     //     */

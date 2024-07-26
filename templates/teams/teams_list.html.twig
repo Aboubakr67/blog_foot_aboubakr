@@ -20,7 +20,6 @@
 		{% for team in pagination %}
 			<div class="team-card">
 				<a href="{{ path('teams_details', { 'slug': team.slug , 'id': team.id }) }}" class="link">Voir détails</a>
-				{# <img src="{{ asset(team.pathImage) }}" alt="{{ team.name }} logo" class="team-logo"> #}
 				<img src="{{ team.pathImage ? asset(team.pathImage) : asset('images/default-team-logo.png') }}" alt="{{ team.name }} logo" class="team-logo">
 				<div class="team-name">{{ team.name }}</div>
 			</div>

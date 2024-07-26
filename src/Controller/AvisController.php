@@ -16,29 +16,26 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\String\Slugger\AsciiSlugger;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class AvisController extends AbstractController
 {
-    // #[Route('/avis', name: 'avis_list')]
-    // public function avis_list(AvisRepository $avisRepository): Response
-    // {
-    //     $avis = $avisRepository->findAll();
+    private $security;
 
-    //     return $this->render('avis/avis_list.html.twig', [
-    //         'avis' => $avis,
-    //         'title' => 'Listes avis'
-    //     ]);
-    // }
+    public function __construct(Security $security)
+    {
+        $this->security = $security;
+    }
 
     #[Route('/avis', name: 'avis_list')]
     public function avis_list(AvisRepository $avisRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        $queryBuilder = $avisRepository->createQueryBuilder('a');
+        $queryBuilder = $avisRepository->findAllSorted();
 
         $pagination = $paginator->paginate(
-            $queryBuilder, /* query NOT result */
-            $request->query->getInt('page', 1), /*page number*/
-            9 /*limit per page*/
+            $queryBuilder, 
+            $request->query->getInt('page', 1), 
+            9
         );
 
         return $this->render('avis/avis_list.html.twig', [
@@ -71,6 +68,7 @@ class AvisController extends AbstractController
     #[IsGranted('ROLE_USER')]
     public function new(Request $request, EntityManagerInterface $entityManager, Security $security, UserRepository $userRepository): Response
     {
+
         $avis = new Avis();
         $form = $this->createForm(AvisType::class, $avis);
 
@@ -78,10 +76,8 @@ class AvisController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            // Get the current user
             $user = $security->getUser();
 
-            // For non-admin users, set the user explicitly
             if (!$security->isGranted('ROLE_ADMIN')) {
                 $userId = $form->get('user')->getData();
                 $user = $userRepository->find($userId);
@@ -94,7 +90,6 @@ class AvisController extends AbstractController
 
             $avis->setCreatedAt(new \DateTimeImmutable());
 
-            // Get the game from the form
             $game = $form->get('game')->getData();
 
             if ($game instanceof Games) {
@@ -123,6 +118,12 @@ class AvisController extends AbstractController
     #[IsGranted('ROLE_USER')]
     public function edit(Avis $avis, Request $request, EntityManagerInterface $entityManager): Response
     {
+        $user = $this->getUser();
+        // Vérifiez si l'utilisateur est un administrateur ou s'il est le propriétaire de l'avis
+        if (!$this->security->isGranted('ROLE_ADMIN') && $user->getId() !== $avis->getUser()->getId()) {
+            throw new AccessDeniedException('Vous n\'êtes pas autorisé à modifier cet avis.');
+        }
+
         $form = $this->createForm(AvisType::class, $avis);
 
         $form->handleRequest($request);
@@ -130,7 +131,6 @@ class AvisController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $avis->setUpdatedAt(new \DateTimeImmutable());
 
-            // Get the game from the form
             $game = $form->get('game')->getData();
 
             if ($game instanceof Games) {
@@ -160,6 +160,13 @@ class AvisController extends AbstractController
     #[IsGranted('ROLE_USER')]
     public function delete(Avis $avis, EntityManagerInterface $entityManager): Response
     {
+
+        $user = $this->getUser();
+
+        if (!$this->security->isGranted('ROLE_ADMIN') && $user->getId() !== $avis->getUser()->getId()) {
+            throw new AccessDeniedException('Vous n\'êtes pas autorisé à supprimer cet avis.');
+        }
+
         $entityManager->remove($avis);
         $entityManager->flush();
 

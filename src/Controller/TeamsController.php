@@ -21,19 +21,12 @@ class TeamsController extends AbstractController
     #[Route('/teams', name: 'teams_list')]
     public function teams_list(TeamsRepository $teamsRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        // $teams = $teamsRepository->findAll();
-
-        // return $this->render('teams/teams_list.html.twig', [
-        //     'teams' => $teams,
-        //     'title' => 'Listes des équipes'
-        // ]);
-
-        $queryBuilder = $teamsRepository->createQueryBuilder('a');
+        $queryBuilder = $teamsRepository->findAllSorted();
 
         $pagination = $paginator->paginate(
-            $queryBuilder, /* query NOT result */
-            $request->query->getInt('page', 1), /*page number*/
-            16 /*limit per page*/
+            $queryBuilder,
+            $request->query->getInt('page', 1),
+            16
         );
 
         return $this->render('teams/teams_list.html.twig', [
@@ -130,16 +123,10 @@ class TeamsController extends AbstractController
                 // Supprimez l'ancienne image, s'il y en a une
                 $oldFilename = $team->getPathImage();
                 if ($oldFilename) {
-                    // $oldFilepath = $this->getParameter('images_directory') . $oldFilename;
-                    // Assurez-vous de ne pas dupliquer le préfixe '/images'
                     $oldFilepath = $this->getParameter('images_directory') . '/' . ltrim($oldFilename, '/images');
                     if (file_exists($oldFilepath)) {
-                        // dd("rentre");
                         unlink($oldFilepath);
                     }
-                    // dump($this->getParameter('images_directory'));
-                    // dump($oldFilepath);
-                    // dd("en dehort");
                 }
 
                 // Traitement de la nouvelle image

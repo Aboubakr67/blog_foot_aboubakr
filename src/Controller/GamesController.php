@@ -19,19 +19,12 @@ class GamesController extends AbstractController
     #[Route('/games', name: 'games_list')]
     public function games_list(GamesRepository $gamesRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        // $games = $gamesRepository->findAll();
-
-        // return $this->render('games/games_list.html.twig', [
-        //     'games' => $games,
-        //     'title' => 'Listes des matchs'
-        // ]);
-
-        $queryBuilder = $gamesRepository->createQueryBuilder('a');
+        $queryBuilder = $gamesRepository->findAllSorted();
 
         $pagination = $paginator->paginate(
-            $queryBuilder, /* query NOT result */
-            $request->query->getInt('page', 1), /*page number*/
-            9 /*limit per page*/
+            $queryBuilder, 
+            $request->query->getInt('page', 1), 
+            9 
         );
 
         return $this->render('games/games_list.html.twig', [
@@ -101,7 +94,7 @@ class GamesController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $game->setUpdatedAt(new \DateTimeImmutable());
 
-            // Get the game from the form
+            
             $gameForm = $form->getData();
 
             if ($gameForm instanceof Games) {
@@ -111,10 +104,6 @@ class GamesController extends AbstractController
             } else {
                 throw new \Exception('Game not found');
             }
-
-            // $slugger = new AsciiSlugger();
-            // $slug = $slugger->slug($game->getEquipeDomicile()->getName() . "-vs-" . $game->getEquipeExterieur()->getName())->lower();
-            // $game->setSlug($slug);
 
             $entityManager->persist($game);
             $entityManager->flush();

@@ -1,44 +1,3 @@
-{# {% extends 'base.html.twig' %}
-
-{% block title %}
-	{{title}}
-{% endblock %}
-
-{% block stylesheets %}{% endblock %}
-
-{% block body %}
-
-	<h1 style="text-align: center">Liste des avis</h1>
-
-	<div class="avis-container">
-		{% for avi in avis %}
-			<div class="avis-card">
-				<div class="avis-card-header">
-					<div class="equipe">
-						<img src="{{ asset(avi.game.equipeDomicile.pathImage) }}" alt="{{ avi.game.equipeDomicile.name }} logo">
-						<span>{{ avi.game.equipeDomicile.name }}</span>
-					</div>
-					<div class="score">
-						{{ avi.game.score }}
-					</div>
-					<div class="equipe">
-						<img src="{{ asset(avi.game.equipeExterieur.pathImage) }}" alt="{{ avi.game.equipeExterieur.name }} logo">
-						<span>{{ avi.game.equipeExterieur.name }}</span>
-					</div>
-				</div>
-				<div class="avis-card-body">
-					{{ avi.commentaire|raw }}
-				</div>
-				<div class="avis-card-link">
-					<a href="{{ path('avis_details', { 'slug': avi.slug, 'id': avi.id }) }}" class="link">Voir détails</a>
-				</div>
-			</div>
-		{% endfor %}
-	</div>
-{% endblock %} #}
-
-
-{# templates/avis/avis_list.html.twig #}
 {% extends 'base.html.twig' %}
 
 {% block title %}
@@ -76,11 +35,6 @@
             </div>
         {% endfor %}
     </div>
-
-    {# <div class="pagination">
-        {{ knp_pagination_render(pagination) }}
-    </div> #}
-
 
 	<div class="pagination-wrapper text-center">
         {{ knp_pagination_render(pagination) }}

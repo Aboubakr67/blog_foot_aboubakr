@@ -16,6 +16,15 @@ class GamesRepository extends ServiceEntityRepository
         parent::__construct($registry, Games::class);
     }
 
+    public function findAllSorted()
+    {
+        return $this->createQueryBuilder('a')
+            ->addSelect('COALESCE(a.updatedAt, a.createdAt) AS HIDDEN sortDate')
+            ->orderBy('sortDate', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
     //    /**
     //     * @return Games[] Returns an array of Games objects
     //     */

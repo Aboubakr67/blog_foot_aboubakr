@@ -10,12 +10,18 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 use Symfony\Component\String\Slugger\AsciiSlugger;
-// use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 
 class AppFixtures extends Fixture
 {
 
+    private UserPasswordHasherInterface $userPasswordHasher;
+
+    public function __construct(UserPasswordHasherInterface $userPasswordHasher)
+    {
+        $this->userPasswordHasher = $userPasswordHasher;
+    }
 
     public function load(ObjectManager $manager): void
     {
@@ -95,6 +101,19 @@ class AppFixtures extends Fixture
             $avis->setSlug($slug);
             $manager->persist($avis);
         }
+
+        // Admin
+        $user = new User();
+        $user->setUsername("admin");
+        $user->setEmail("admin@gmail.com");
+        $hashedPassword = $userPasswordHasher->hashPassword(
+            $user,
+            "123456"
+        );
+        $user->setPassword($hashedPassword);
+        $user->setCreatedAt(new \DateTimeImmutable);
+        $user->setRoles(['ROLE_USER', 'ROLE_ADMIN']);
+        $manager->persist($user);
 
         $manager->flush();
     }

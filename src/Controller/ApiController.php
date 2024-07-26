@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Repository\AvisRepository;
 use App\Repository\GamesRepository;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Repository\TeamsRepository;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ApiController extends AbstractController
@@ -17,59 +19,26 @@ class ApiController extends AbstractController
     }
 
     #[Route('/api/games', name: 'api_games')]
-    public function getGames()
+    public function getGames(GamesRepository $gamesRepository): JsonResponse
     {
-        $games = $this->gamesRepository->findAll();
-        $data = [];
+        $games = $gamesRepository->findAll();
 
-        foreach ($games as $game) {
-            $gameData = [
-                'id' => $game->getId(),
-                'title' => $game->getTitle(),
-                'equipeDomicile' => [
-                    'id' => $game->getEquipeDomicile()->getId(),
-                    'name' => $game->getEquipeDomicile()->getName(),
-                ],
-                'equipeExterieur' => [
-                    'id' => $game->getEquipeExterieur()->getId(),
-                    'name' => $game->getEquipeExterieur()->getName(),
-                ],
-                'dateMatch' => $game->getDateMatch()->format('Y-m-d'),
-                'createdAt' => $game->getCreatedAt()->format('Y-m-d H:i:s'),
-                'updatedAt' => $game->getUpdatedAt() ? $game->getUpdatedAt()->format('Y-m-d H:i:s') : null,
-                'score' => $game->getScore(),
-                'slug' => $game->getSlug(),
-                'avis' => [],
-            ];
-
-            foreach ($game->getCommentaire() as $avis) {
-                $gameData['avis'][] = [
-                    'id' => $avis->getId(),
-                    'user' => $avis->getUser()->getId(), // Assurez-vous d'ajouter plus de détails utilisateur si nécessaire
-                    'commentaire' => $avis->getCommentaire(),
-                    'createdAt' => $avis->getCreatedAt()->format('Y-m-d H:i:s'),
-                    'updatedAt' => $avis->getUpdatedAt() ? $avis->getUpdatedAt()->format('Y-m-d H:i:s') : null,
-                    'slug' => $avis->getSlug(),
-                ];
-            }
-
-            $data[] = $gameData;
-        }
-
-        return new JsonResponse($data);
+        return $this->json($games, 200, [], ['groups' => 'game.list']);
     }
-    // public function getGames()
-    // {
-    //     $games = $this->gamesRepository->findAll();
-    //     $data = [];
 
-    //     foreach ($games as $game) {
-    //         $data[] = [
-    //             'id' => $game->getId(),
-    //             'slug' => $game->getSlug(),
-    //         ];
-    //     }
+    #[Route('/api/avis', name: 'api_avis')]
+    public function getAvis(AvisRepository $avisRepository): JsonResponse
+    {
+        $avis = $avisRepository->findAll();
 
-    //     return new JsonResponse($data);
-    // }
+        return $this->json($avis, 200, [], ['groups' => 'avis.list']);
+    }
+
+    #[Route('/api/teams', name: 'api_teams')]
+    public function getTeams(TeamsRepository $teamsRepository): JsonResponse
+    {
+        $teams = $teamsRepository->findAll();
+
+        return $this->json($teams, 200, [], ['groups' => 'team.list']);
+    }
 }

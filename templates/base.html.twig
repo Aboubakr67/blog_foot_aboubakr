@@ -27,10 +27,10 @@
 			<div class="mb-3">
 				Vous êtes connecté(e) en tant que
 				{{ app.user.userIdentifier }},
-				{# <a href="{{ path('app_logout') }}">Me déconnecter</a> #}
 			</div>
 		{% endif %}
 
 		{% block body %}{% endblock %}
+		{% include "_partials/footer.html.twig" %}
 	</body>
 </html>

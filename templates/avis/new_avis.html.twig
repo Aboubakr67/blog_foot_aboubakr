@@ -8,7 +8,7 @@
 
 	<h1 style="text-align: center">Créer un nouvel Avis</h1>
 
-	<div class="form-container">
+	<div class="form-container mb-5">
 		{{ form_start(form) }}
 		{% if app.user and not is_granted('ROLE_ADMIN') %}
 			<div class="form-group">

@@ -5,11 +5,6 @@ body {
   background-color: antiquewhite;
 }
 
-/* header {
-  color: white;
-  padding: 10px 0;
-} */
-
 .navbar {
   display: grid;
   grid-template-columns: 1fr auto;
@@ -97,7 +92,7 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/*  avis_list.html.twig -- page qui affiche la liste des avis*/
+/*  avis_list.html.twig */
 .avis-container {
   display: flex;
   flex-wrap: wrap;
@@ -178,7 +173,7 @@ body {
   background-color: white;
 }
 
-/*  avis_details.html.twig -- page qui affiche le details d'un avis*/
+/*  avis_details.html.twig */
 .detail-container {
   max-width: 800px;
   margin: 0 auto;
@@ -260,15 +255,11 @@ body {
 }
 
 .detail-container a.delete:hover {
-  /* text-decoration: underline; */
-  /* color: #0056b3; */
   color: black;
   background-color: red;
 }
 
 .detail-container a.edit:hover {
-  /* text-decoration: underline; */
-  /* color: #0056b3; */
   color: black;
   background-color: blue;
 }
@@ -278,7 +269,7 @@ body {
   text-align: center;
 }
 
-/*  teams_list.html.twig -- page qui la liste des equipess*/
+/*  teams_list.html.twig */
 
 .teams-container {
   display: flex;
@@ -316,7 +307,7 @@ body {
   color: #333;
 }
 
-/* new_avis.html.twig -  Afficher le formulaire de creation d'un avis */
+/* new_avis.html.twig */
 .form-container {
   max-width: 600px;
   margin: 0 auto;
@@ -374,7 +365,7 @@ body {
   background-color: #0056b3;
 }
 
-/* Media query page Accueil */
+/* Accueil */
 @media (min-width: 901px) {
   .main-image {
     min-width: 900px;
@@ -409,35 +400,32 @@ body {
 
 /* Avis  */
 
-/* Media query for smaller screens */
 @media (max-width: 768px) {
   .avis-card {
-    width: calc(45% - 20px); /* Adjust width for 2 cards per row */
+    width: calc(45% - 20px);
   }
 }
 
-/* Media query for very small screens */
 @media (max-width: 480px) {
   .avis-card {
-    width: calc(100% - 20px); /* Full width for single column */
+    width: calc(100% - 20px);
   }
 }
 
 /* Contact */
 
-/* Style pour le formulaire de contact */
 .contact-form {
   max-width: 800px;
-  margin: 0 auto; /* Centre le formulaire horizontalement */
+  margin: 0 auto;
   padding: 2rem;
-  background-color: #f9f9f9; /* Fond légèrement gris */
-  border-radius: 8px; /* Coins arrondis */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère */
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .contact-form .form-control {
   border-radius: 0.25rem;
-  box-shadow: none; /* Enlever les ombres pour une apparence plus nette */
+  box-shadow: none;
 }
 
 .contact-form .form-label {
@@ -446,10 +434,9 @@ body {
 
 .contact-form .btn-primary {
   border-radius: 0.25rem;
-  padding: 1rem 2rem; /* Taille du bouton */
+  padding: 1rem 2rem;
 }
 
-/* Styles pour les écrans plus petits */
 @media (max-width: 767.98px) {
   .contact-form {
     padding: 1rem;
@@ -459,16 +446,16 @@ body {
 /* Inscription */
 .registration-form {
   max-width: 600px;
-  margin: 0 auto; /* Centre le formulaire horizontalement */
+  margin: 0 auto;
   padding: 2rem;
-  background-color: #f9f9f9; /* Fond légèrement gris */
-  border-radius: 8px; /* Coins arrondis */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère */
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .registration-form .form-control {
   border-radius: 0.25rem;
-  box-shadow: none; /* Enlever les ombres pour une apparence plus nette */
+  box-shadow: none;
 }
 
 .registration-form .form-label {
@@ -477,10 +464,9 @@ body {
 
 .registration-form .btn-primary {
   border-radius: 0.25rem;
-  padding: 1rem 2rem; /* Taille du bouton */
+  padding: 1rem 2rem;
 }
 
-/* Styles pour les écrans plus petits */
 @media (max-width: 767.98px) {
   .registration-form {
     padding: 1rem;
@@ -509,22 +495,19 @@ body {
   padding: 1rem;
 }
 
-/* Styles pour les écrans plus petits */
 @media (max-width: 767.98px) {
   .form-signin {
     padding: 1rem;
   }
 }
 
-/* CSS pour personnaliser la pagination */
-/* Centrer la pagination */
+/* Pagination */
 .pagination-wrapper {
   display: flex;
   justify-content: center;
-  margin: 20px 0; /* Espacement vertical */
+  margin: 20px 0;
 }
 
-/* Assurer que les éléments de pagination sont sur une seule ligne */
 .pagination {
   display: flex;
   list-style: none;
@@ -533,30 +516,59 @@ body {
 }
 
 .page-item {
-  margin: 0 2px; /* Espacement entre les éléments de pagination */
+  margin: 0 2px;
 }
 
 .page-link {
-  padding: 0.5rem 0.75rem; /* Ajuster le padding */
-  border-radius: 0.25rem; /* Coins arrondis */
-  border: 1px solid #dee2e6; /* Bordure grise pour les boutons */
-  background-color: #fff; /* Fond blanc pour les boutons */
-  color: #007bff; /* Couleur du texte des boutons */
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.25rem;
+  border: 1px solid #dee2e6;
+  background-color: #fff;
+  color: #007bff;
 }
 
 .page-item.active .page-link {
-  background-color: #007bff; /* Couleur de fond pour l'élément actif */
-  border-color: #007bff; /* Couleur de bordure pour l'élément actif */
-  color: #fff; /* Couleur du texte pour l'élément actif */
+  background-color: #007bff;
+  border-color: #007bff;
+  color: #fff;
 }
 
 .page-link:hover {
-  background-color: #f8f9fa; /* Couleur de fond au survol */
-  border-color: #ced4da; /* Couleur de bordure au survol */
+  background-color: #f8f9fa;
+  border-color: #ced4da;
 }
 
 /* Mentions légales */
 
 .legal-notice {
-  padding: 20px; /* Vous pouvez ajuster cette valeur selon vos besoins */
+  padding: 20px;
+}
+
+/* Footer */
+
+.main-content {
+  flex: 1;
+}
+
+.footer {
+  background-color: rgba(0, 0, 0, 0.567);
+  color: white;
+}
+
+.footer-nav .footer-item {
+  padding: 9px;
+  background-color: rgba(0, 0, 0, 0.567);
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.footer-nav .footer-link {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.footer-nav .footer-link:hover {
+  color: #ffc107;
 }

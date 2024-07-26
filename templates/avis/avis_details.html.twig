@@ -8,7 +8,7 @@
 
 	<h1 style="text-align: center">Détails</h1>
 
-	<div class="detail-container">
+	<div class="detail-container mb-5">
 		<div class="team-info">
 			<div class="team">
 				<img src="{{ asset(avis.game.equipeDomicile.pathImage) }}" alt="{{ avis.game.equipeDomicile.name }} logo">
@@ -35,16 +35,17 @@
 			{{ avis.updatedAt ? 'Mise à jour le : ' ~ avis.updatedAt|date('d/m/Y H:i:s') : 'Créé le : ' ~ avis.createdAt|date('d/m/Y H:i:s') }}
 		</p>
 		{% if is_granted('ROLE_ADMIN') or (app.user and app.user.id == avis.user.id) %}
-			<div class="link-container">
-				<a class="edit" href="{{ path('avis_edit', { 'slug': avis.slug , 'id': avis.id }) }}">Modifier</a>
-				{# Formulaire de suppression #}
-				<form method="post" action="{{ path('avis_delete', {slug: avis.slug, id: avis.id}) }}" onsubmit="return confirm('Etes vous sur de supprimer cette avis ?');">
+			<div
+				class="link-container">
+				<a class="btn btn-primary" href="{{ path('avis_edit', { 'slug': avis.slug , 'id': avis.id }) }}">Modifier</a>
+
+				<form method="post" action="{{ path('avis_delete', {slug: avis.slug, id: avis.id}) }}" class="d-inline" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet avis ?');">
 					<input type="hidden" name="_method" value="DELETE">
-					<button type="submit">Supprimer</button>
+					<button type="submit" class="btn btn-danger">Supprimer</button>
 				</form>
-				{# <a class="delete" href="{{ path('avis_delete', {id: avis.id}) }}">Supprimer</a> #}
 			</div>
 		{% endif %}
+
 	</div>
 
 {% endblock %}

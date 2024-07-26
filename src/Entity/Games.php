@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: GamesRepository::class)]
 class Games
@@ -17,19 +18,23 @@ class Games
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['game.list', 'avis.list'])]
     private ?string $title = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['game.list','avis.list'])]
     private ?Teams $equipeDomicile = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['game.list', 'avis.list'])]
     private ?Teams $equipeExterieur = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Groups(['game.list' , 'avis.list'])]
     private ?\DateTimeInterface $dateMatch = null;
-
+    
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
@@ -40,9 +45,11 @@ class Games
      * @var Collection<int, Avis>
      */
     #[ORM\OneToMany(targetEntity: Avis::class, mappedBy: 'game')]
+    #[Groups(['game.list'])]
     private Collection $commentaire;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['game.list'])]
     private ?string $score = null;
 
     #[ORM\Column(length: 255)]
