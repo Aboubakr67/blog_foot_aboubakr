@@ -122,9 +122,15 @@ Le projet expose les API suivantes pour interagir avec les données :
 
 - **Détails d’un avis** :
   Possibilité de modifier ou de supprimer un avis uniquement pour la personne qui l’a créé et l'admin.
+    ![Listes des matchs](public/images-illustration/details-avis.png)
 
 - **Détails des équipes et des matchs** :
   Possibilité de modifier ou de supprimer uniquement pour la personne qui les a créés et l'admin.
+
+### Inscrit
+- **Créer un avis** :
+  ![Créer un avis](public/images-illustration/new-avis.png)
+
 
 ### Admin
 
@@ -162,6 +168,7 @@ Le projet expose les API suivantes pour interagir avec les données :
 
 - **Détails d’un avis** :
   L’admin peut supprimer ou modifier les avis.
+   ![Profile](public/images-illustration/details-avis-admin.png)
 
 - **Profile** :
   ![Profile](public/images-illustration/profile.png)
