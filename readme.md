@@ -148,26 +148,6 @@ Le projet expose les API suivantes pour interagir avec les données :
 
 - **Détails d’un avis** :
   L’admin peut supprimer ou modifier les avis.
-
-- **Profile** :
-  ![Profile](public/images-illustration/profile.png)
-
-### Admin
-
-- **Page d’accueil** :
-  ![Page d'accueil Admin](public/images-illustration/page_accueil_admin.png)
-
-- **Dashboard** :
-  ![Dashboard](public/images-illustration/dashboard.png)
-
-- **Créer une nouvelle équipe** :
-  ![Créer une équipe](public/images-illustration/creer_equipe.png)
-
-- **Créer un nouveau match** :
-  ![Créer un match](public/images-illustration/creer_match.png)
-
-- **Détails d’un avis** :
-  L’admin peut supprimer ou modifier les avis.
    ![Profile](public/images-illustration/details-avis-admin.png)
 
 - **Profile** :
