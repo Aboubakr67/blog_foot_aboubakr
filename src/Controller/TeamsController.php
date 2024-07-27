@@ -167,25 +167,26 @@ class TeamsController extends AbstractController
         ]);
     }
 
-    #[Route('/teams/{slug}-{id}/delete', name: 'teams_delete', requirements: [
-        'slug' => '[a-z0-9-]+',
-        'id' => '\d+'
-    ], methods: ['DELETE'])]
-    #[IsGranted('ROLE_ADMIN')]
-    public function delete(Teams $team, EntityManagerInterface $entityManager): Response
-    {
-        // Vérifiez s'il y a un fichier d'image associé et supprimez-le
-        $Filename = $team->getPathImage();
-        if ($Filename) {
-            $oldFilepath = $this->getParameter('images_directory') . '/' . ltrim($Filename, '/images');
-            if (file_exists($oldFilepath)) {
-                unlink($oldFilepath);
-            }
-        }
+    // TODO marche pas car jointure ( à faire plus tard )
+    // #[Route('/teams/{slug}-{id}/delete', name: 'teams_delete', requirements: [
+    //     'slug' => '[a-z0-9-]+',
+    //     'id' => '\d+'
+    // ], methods: ['DELETE'])]
+    // #[IsGranted('ROLE_ADMIN')]
+    // public function delete(Teams $team, EntityManagerInterface $entityManager): Response
+    // {
+    //     // Vérifiez s'il y a un fichier d'image associé et supprimez-le
+    //     $Filename = $team->getPathImage();
+    //     if ($Filename) {
+    //         $oldFilepath = $this->getParameter('images_directory') . '/' . ltrim($Filename, '/images');
+    //         if (file_exists($oldFilepath)) {
+    //             unlink($oldFilepath);
+    //         }
+    //     }
 
-        $entityManager->remove($team);
-        $entityManager->flush();
+    //     $entityManager->remove($team);
+    //     $entityManager->flush();
 
-        return $this->redirectToRoute('teams_list');
-    }
+    //     return $this->redirectToRoute('teams_list');
+    // }
 }

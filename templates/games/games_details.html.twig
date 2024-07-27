@@ -47,10 +47,10 @@
 				{% if is_granted('ROLE_ADMIN') %}
 					<div class="text-center mt-4">
 						<a class="btn btn-primary mx-2" href="{{ path('games_edit', { 'slug': game.slug, 'id': game.id }) }}">Modifier</a>
-						<form method="post" action="{{ path('games_delete', { 'slug': game.slug, 'id': game.id }) }}" class="d-inline" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce jeu ?');">
+						{# <form method="post" action="{{ path('games_delete', { 'slug': game.slug, 'id': game.id }) }}" class="d-inline" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce jeu ?');">
 							<input type="hidden" name="_method" value="DELETE">
 							<button type="submit" class="btn btn-danger">Supprimer</button>
-						</form>
+						</form> #}
 					</div>
 				{% endif %}
 			</div>

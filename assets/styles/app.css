@@ -572,3 +572,13 @@ body {
 .footer-nav .footer-link:hover {
   color: #ffc107;
 }
+
+/* Profile */
+
+.profile-img {
+  width: 200px;
+  height: 10%;
+  /*object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #ddd;  */
+}

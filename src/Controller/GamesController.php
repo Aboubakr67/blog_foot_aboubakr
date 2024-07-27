@@ -117,16 +117,17 @@ class GamesController extends AbstractController
         ]);
     }
 
-    #[Route('/games/{slug}-{id}/delete', name: 'games_delete', requirements: [
-        'slug' => '[a-z0-9-]+',
-        'id' => '[0-9]+'
-    ], methods: ['DELETE'])]
-    #[IsGranted('ROLE_ADMIN')]
-    public function delete(Games $game, EntityManagerInterface $entityManager): Response
-    {
-        $entityManager->remove($game);
-        $entityManager->flush();
+    // TODO marche pas car jointure ( à faire plus tard )
+    // #[Route('/games/{slug}-{id}/delete', name: 'games_delete', requirements: [
+    //     'slug' => '[a-z0-9-]+',
+    //     'id' => '[0-9]+'
+    // ], methods: ['DELETE'])]
+    // #[IsGranted('ROLE_ADMIN')]
+    // public function delete(Games $game, EntityManagerInterface $entityManager): Response
+    // {
+    //     $entityManager->remove($game);
+    //     $entityManager->flush();
 
-        return $this->redirectToRoute('games_list');
-    }
+    //     return $this->redirectToRoute('games_list');
+    // }
 }

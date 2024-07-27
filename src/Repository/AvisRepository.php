@@ -16,6 +16,7 @@ class AvisRepository extends ServiceEntityRepository
         parent::__construct($registry, Avis::class);
     }
 
+    // Pagination (ORDER BY createdAt sinon updatedAt)
     public function findAllSorted()
     {
         return $this->createQueryBuilder('a')
@@ -23,6 +24,32 @@ class AvisRepository extends ServiceEntityRepository
             ->orderBy('sortDate', 'DESC')
             ->getQuery()
             ->getResult();
+    }
+
+    // public function countAvisPerGame(): array
+    // {
+    //     $qb = $this->createQueryBuilder('a')
+    //         ->select('g.equipeDomicile AS domicile, g.equipeExterieur AS exterieur, COUNT(a.id) AS nbAvis')
+    //         ->join('a.game', 'g')
+    //         ->groupBy('g.title')
+    //         ->getQuery();
+
+    //     return $qb->getResult();
+    // }
+
+    public function countAvisPerGame(): array
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->select('td.name AS domicile, 
+                      te.name AS exterieur,
+                      COUNT(a.id) AS nbAvis')
+            ->join('a.game', 'g')
+            ->leftJoin('g.equipeDomicile', 'td')
+            ->leftJoin('g.equipeExterieur', 'te')
+            ->groupBy('g.id, td.name, te.name')
+            ->getQuery();
+
+        return $qb->getResult();
     }
 
     //    /**

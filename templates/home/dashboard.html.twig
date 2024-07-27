@@ -1,9 +1,88 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Dashboard
+{% block title %}Tableau de bord
 {% endblock %}
 
 {% block body %}
+	<div class="container mt-5 mb-5">
+		<h1 class="mb-4 text-center">Tableau de bord</h1>
 
-	<h1>Dashboard</h1>
+		<div
+			class="row">
+			<!-- Nombre d'avis -->
+			<div class="col-md-3 mb-4">
+				<div class="card border-primary">
+					<div class="card-body text-center">
+						<h5 class="card-title">Nombre d'avis</h5>
+						<p class="card-text display-4">{{ countAvis }}</p>
+					</div>
+				</div>
+			</div>
+
+			<!-- Nombre d'équipes -->
+			<div class="col-md-3 mb-4">
+				<div class="card border-success">
+					<div class="card-body text-center">
+						<h5 class="card-title">Nombre d'équipes</h5>
+						<p class="card-text display-4">{{ countTeams }}</p>
+					</div>
+				</div>
+			</div>
+
+			<!-- Nombre de jeux -->
+			<div class="col-md-3 mb-4">
+				<div class="card border-warning">
+					<div class="card-body text-center">
+						<h5 class="card-title">Nombre de matchs</h5>
+						<p class="card-text display-4">{{ countGames }}</p>
+					</div>
+				</div>
+			</div>
+
+			<!-- Nombre d'utilisateurs -->
+			<div class="col-md-3 mb-4">
+				<div class="card border-info">
+					<div class="card-body text-center">
+						<h5 class="card-title">Nombre d'utilisateurs</h5>
+						<p class="card-text display-4">{{ countUsers }}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Avis par jeu -->
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+					<div class="card-header">
+						Avis par Jeu
+					</div>
+					<div class="card-body">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>Équipe Domicile</th>
+									<th>Équipe Extérieure</th>
+									<th>Nombre d'avis</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for item in reviewsPerGame %}
+									<tr>
+										<td>{{ item.domicile }}</td>
+										<td>{{ item.exterieur }}</td>
+										<td>{{ item.nbAvis }}</td>
+									</tr>
+								{% else %}
+									<tr>
+										<td colspan="4" class="text-center">Aucun avis</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}
